@@ -25,6 +25,10 @@ Route::get('books', function () {
     return view('books.index', ['books' => $books]);
 });
 
+Route::get('books/create', function () {
+    return view('books.create');
+});
+
 Route::get('/token', function () {
     return csrf_token(); 
 });
