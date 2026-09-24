@@ -13,12 +13,22 @@ git clone https://github.com/SleepyFeeshy/pmc_submission_romualdez.git
 composer install
 ```
 
-3. Run database seeders
+3. Run database migration and database seeders
 ```
 php artisan migrate:fresh --seed
 ```
 
-4. Run the project
+4. Install JavaScript dependencies
+```
+npm install
+```
+
+5. Compile assets
+```
+npm run build 
+```
+
+6. Run the project
 ```
 php artisan serve
 ```
