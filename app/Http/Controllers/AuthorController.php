@@ -33,15 +33,18 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => ['required','max:255'],
+            'birth_date' => ['required', 'date'],
+        ]);
         //
         $author = new Author;
         $author->name = $request->input('name');
         $author->birth_date = $request->input('birth_date');
         $author->save();
 
-        return response()->json([
-            'success' => true,
-        ]);
+        return redirect()->route('authors.index')
+        ->with('success', 'Author created successfully!');
     }
 
     /**
