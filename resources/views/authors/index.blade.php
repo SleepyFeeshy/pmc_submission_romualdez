@@ -16,6 +16,7 @@
             <td>{{ $author->birth_date }} </td>
             <td>{{ $author->created_at }} </td>
             <td>{{ $author->updated_at }} </td>
+            <td> <a href="{{ route('authors.edit', $author->id) }}"> Edit </a> </td>
         </tr>
         @endforeach
     </table>
