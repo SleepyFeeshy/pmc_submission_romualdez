@@ -26,6 +26,7 @@ class BookController extends Controller
     public function create()
     {
         //
+        return view("books.create");
     }
 
     /**
@@ -33,6 +34,13 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        //
+        $validated = $request->validate([
+            'title' => ['required','max:255'],
+            'author_id' => ['required', 'exists:authors,id'],
+            'published_date' => ['required', 'date']
+        ]);
+
         //
         $book = new Book;
         $book->title = $request->input('title');
