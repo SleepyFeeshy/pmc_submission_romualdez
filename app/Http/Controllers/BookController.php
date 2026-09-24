@@ -48,9 +48,8 @@ class BookController extends Controller
         $book->published_date = $request->input('published_date');
         $book->save();
 
-        return response()->json([
-            'success' => true,
-        ]);
+        return redirect()->route('books.index')
+        ->with('success', 'books created successfully!');
     }
 
     /**
@@ -72,6 +71,8 @@ class BookController extends Controller
     public function edit(string $id)
     {
         //
+        $book = Book::findOrFail($id);
+        return view("books.edit", ["author" => $book]);
     }
 
     /**
@@ -80,6 +81,16 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $book = Book::findOrFail($id);
+        $book->title = $request->input('title');
+        $book->author_id = $request->input('author_id');
+        $book->published_date = $request->input('published_date');
+        $book->save();
+
+        return response()->json([
+            'success' => true,
+            'data' => $book
+        ]);
     }
 
     /**
