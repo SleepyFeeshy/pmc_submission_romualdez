@@ -83,6 +83,11 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'title' => ['required','max:255'],
+            'author_id' => ['required', 'exists:authors,id'],
+            'published_date' => ['required', 'date']
+        ]);
         //
         $book = Book::findOrFail($id);
         $book->title = $request->input('title');
@@ -90,10 +95,11 @@ class BookController extends Controller
         $book->published_date = $request->input('published_date');
         $book->save();
 
-        return response()->json([
-            'success' => true,
-            'data' => $book
-        ]);
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => $book
+        // ]);
+        return $book;
     }
 
     /**
