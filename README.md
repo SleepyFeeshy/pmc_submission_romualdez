@@ -33,3 +33,8 @@ php artisan serve
 ```
 npm run dev
 ```
+
+7. For testing
+```
+php artisan test
+```
