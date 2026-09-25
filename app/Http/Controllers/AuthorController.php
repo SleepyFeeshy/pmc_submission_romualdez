@@ -14,10 +14,7 @@ class AuthorController extends Controller
     {
         //
         $authors = Author::all();
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $authors,
-        // ]);
+
         return $authors;
     }
 
@@ -44,12 +41,6 @@ class AuthorController extends Controller
         $author->birth_date = $request->input('birth_date');
         $author->save();
 
-        // return redirect()->route('authors.index')
-        // ->with('success', 'Author created successfully!');
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $author
-        // ]);
         return $author;
     }
 
@@ -92,10 +83,6 @@ class AuthorController extends Controller
         $author->birth_date = $request->input('birth_date');
         $author->save();
 
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $author
-        // ]);
         return $author;
     }
 

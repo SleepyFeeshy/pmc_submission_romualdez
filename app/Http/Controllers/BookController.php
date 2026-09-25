@@ -14,10 +14,7 @@ class BookController extends Controller
     {
         //
         $books = Book::all();
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $books,
-        // ]);
+
         return $books;
     }
 
@@ -49,8 +46,6 @@ class BookController extends Controller
         $book->published_date = $request->input('published_date');
         $book->save();
 
-        // return redirect()->route('books.index')
-        // ->with('success', 'books created successfully!');
         return $book;
     }
 
@@ -61,10 +56,7 @@ class BookController extends Controller
     {
         //
         $book = Book::findOrFail($id);
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $book,
-        // ]);
+
         return $book;
     }
 
@@ -95,10 +87,6 @@ class BookController extends Controller
         $book->published_date = $request->input('published_date');
         $book->save();
 
-        // return response()->json([
-        //     'success' => true,
-        //     'data' => $book
-        // ]);
         return $book;
     }
 
