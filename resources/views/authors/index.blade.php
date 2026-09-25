@@ -23,10 +23,10 @@
                         <td class="font-mono text-gray-500">${author.birth_date} </td>
                         <td class="font-mono text-gray-500">${author.created_at} </td>
                         <td class="font-mono text-gray-500">${author.updated_at} </td>
-                        <td> 
-                            <a class="text-sm" href="api/authors/${author.id}/show"> View </a> 
-                            <a class="text-sm" href="api/authors/${author.id}/edit"> Edit </a>
-                            <button class="delete-btn font-sm p-1 rounded-sm bg-red-700 hover:bg-red-800 text-white font-semibold hover:cursor-pointer" data-id="${author.id}"> Delete </button>
+                        <td class="flex gap-1"> 
+                            <a class="text-sm min-w-10 text-center font-sm p-1 rounded-sm bg-blue-500 hover:bg-blue-800 text-white font-semibold hover:cursor-pointer" href="authors/${author.id}"> View </a> 
+                            <a class="text-sm min-w-10 text-center font-sm p-1 rounded-sm bg-blue-500 hover:bg-blue-800 text-white font-semibold hover:cursor-pointer" href="api/authors/${author.id}/edit"> Edit </a>
+                            <button class="delete-btn text-sm min-w-10 text-center p-1 rounded-sm bg-red-700 hover:bg-red-800 text-white font-semibold hover:cursor-pointer" data-id="${author.id}"> Delete </button>
                         </td>
                     </tr>
                 `
@@ -55,11 +55,11 @@
             <th> birth_date </th>
             <th> created_at </th>
             <th> updated_at </th>
-            <th> Actions </th>
+            <th> Action </th>
             </tr>
         </thead>
         <tbody id="table-body">
-        </tbody >
+        </tbody>
         {{-- @foreach ($authors as $author)
         <tr>
             <td>{{ $author->id }} </td>
