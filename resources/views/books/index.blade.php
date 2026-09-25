@@ -2,17 +2,21 @@
 
 @section('content')
 <script>
+        let allBooks = [];
         const deleteBook = async function (id) {
             response = await fetch('/api/books/' + id, {
                 method: 'DELETE',
             })
         };
 
-        const loadBooks = async function() {
+        const renderTable = async function(books) {
             const tableBody = document.getElementById('table-body');
-            const response = await fetch("/api/books")
-            const books = await response.json();
             console.log(books)
+
+            if (books.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="6" class="py-4 text-center text-gray-500">No matching authors found</td></tr>`;
+                return;
+            }
 
             tableBody.innerHTML = "";
             books.forEach(function(book) {
@@ -35,14 +39,37 @@
             })
         };
 
+        const loadBooks = async function() {
+            const response = await fetch("/api/books");
+            allBooks = await response.json();
+            filterAndRender();
+        };
+
+        const filterAndRender = function() {
+            const searchTerm = $('#search-input').val().toLowerCase().trim();
+            
+            const filteredBooks = allBooks.filter(book => {
+                const title = (book.title || '').toLowerCase();
+
+                return title.includes(searchTerm);
+            });
+
+            renderTable(filteredBooks);
+        };
+
         $(document).ready(function() {
             loadBooks();
 
+            // Real-time search filter on input
+            $('#search-input').on('keyup input', function() {
+                filterAndRender();
+            });
+
             $('table').on('click', '.delete-btn', async function() {
                 // Read the attributes
-                let authorId = $(this).data('id');
-                console.log("Deleting record ID:", authorId);
-                await deleteBook(authorId);
+                let bookId = $(this).data('id');
+                console.log("Deleting record ID:", bookId);
+                await deleteBook(bookId);
                 await loadBooks();
             });
         });
@@ -50,6 +77,16 @@
     </script>
 
     <div class="">
+        <div class="mb-4 flex justify-between items-center min-w-5xl">
+            <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Search by ID, title, or published date..." 
+                class="px-3 py-2 border border-gray-300 rounded-md text-sm w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+            <a class="p-2 rounded-sm bg-green-600 hover:bg-green-700 text-white text-sm font-semibold" href="/books/create">Add book</a>
+        </div>
+
         <table class="table-fixed min-w-5xl text-sm">
             <thead class="text-sm font-medium text-left">
                 <tr>
