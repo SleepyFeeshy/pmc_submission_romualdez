@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Author;
 
 class AuthorTest extends TestCase
 {
@@ -28,6 +29,19 @@ class AuthorTest extends TestCase
         $response = $this->postJson('/api/authors', $payload);
         $response->assertStatus(201)
             ->assertJsonFragment(['name' => "Firstname Lastname"]);
+    }
+
+    public function test_can_fetch_single_author(): void
+    {
+        $author = Author::factory()->create();
+
+        $response = $this->getJson("/api/authors/{$author->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+                'id' => $author->id,
+                'name' => $author->name,
+            ]);
     }
 
     public function test_can_validate_create_author_no_name(): void
@@ -62,5 +76,19 @@ class AuthorTest extends TestCase
 
         $response = $this->postJson('/api/authors', $payload);
         $response->assertStatus(422);
+    }
+
+    public function test_can_delete_author(): void
+    {
+        $author = Author::factory()->create();
+
+        $response = $this->deleteJson("/api/authors/{$author->id}");
+
+        // Adjust status code depending on whether your API returns 200 or 204
+        $response->assertStatus(200);
+
+        $this->assertDatabaseMissing('authors', [
+            'id' => $author->id,
+        ]);
     }
 }
