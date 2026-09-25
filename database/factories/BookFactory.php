@@ -20,7 +20,7 @@ class BookFactory extends Factory
     {
         return [
             //
-            'title' => fake()->name(),
+            'title' => fake()->text(20),
             'author_id' => Author::all()->random()->id,
             'published_date' => fake()->date(),
         ];
