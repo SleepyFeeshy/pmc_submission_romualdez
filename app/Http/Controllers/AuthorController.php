@@ -81,16 +81,22 @@ class AuthorController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'name' => ['required','max:255'],
+            'birth_date' => ['required', 'date'],
+        ]);
+        
         //
         $author = Author::findOrFail($id);
         $author->name = $request->input('name');
         $author->birth_date = $request->input('birth_date');
         $author->save();
 
-        return response()->json([
-            'success' => true,
-            'data' => $author
-        ]);
+        // return response()->json([
+        //     'success' => true,
+        //     'data' => $author
+        // ]);
+        return $author;
     }
 
     /**
