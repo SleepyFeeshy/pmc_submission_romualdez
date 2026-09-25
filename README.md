@@ -8,32 +8,28 @@
 git clone https://github.com/SleepyFeeshy/pmc_submission_romualdez.git
 ```
 
-2. Install composer packages
+2. Install PHP dependencies
 ```
 composer install
 ```
 
-3. Run database migration and database seeders
+3. Run database migration and seeders
 ```
 php artisan migrate:fresh --seed
 ```
 
-4. Install JavaScript dependencies
+4. Install Node dependencies and build assets
 ```
 npm install
-```
-
-5. Compile assets
-```
 npm run build 
 ```
 
-6. Run the project
+5. Run the project
 ```
 php artisan serve
 ```
 
-7. 
+6. (Optional): For real-time asset compilation during local development
 ```
 npm run dev
 ```
