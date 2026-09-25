@@ -78,6 +78,45 @@ class AuthorTest extends TestCase
         $response->assertStatus(422);
     }
 
+    public function test_can_update_author(): void
+    {
+        $author = Author::factory()->create([
+            'name' => 'Original Name',
+            'birth_date' => '1990-01-01',
+        ]);
+
+        $payload = [
+            'name' => 'Updated Name',
+            'birth_date' => '1995-05-05',
+        ];
+
+        $response = $this->putJson("/api/authors/{$author->id}", $payload);
+
+        $response->assertStatus(200)
+            ->assertJsonFragment(['name' => 'Updated Name']);
+
+        $this->assertDatabaseHas('authors', [
+            'id' => $author->id,
+            'name' => 'Updated Name',
+            'birth_date' => '1995-05-05',
+        ]);
+    }
+
+    public function test_can_validate_update_author_invalid_payload(): void
+    {
+        $author = Author::factory()->create();
+
+        $payload = [
+            'name' => '',
+            'birth_date' => 'invalid-date',
+        ];
+
+        $response = $this->putJson("/api/authors/{$author->id}", $payload);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['name', 'birth_date']);
+    }
+
     public function test_can_delete_author(): void
     {
         $author = Author::factory()->create();
