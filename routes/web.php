@@ -21,6 +21,12 @@ Route::get('authors/create', function () {
     return view('authors.create');
 });
 
+
+Route::get('/authors/{id}', function (string $id) {
+    $author = Author::find($id);
+    return view('authors.show', ['author' => $author]);
+});
+
 Route::get('books', function () {
     $books = Book::all();
     return view('books.index', ['books' => $books]);
@@ -29,6 +35,13 @@ Route::get('books', function () {
 Route::get('books/create', function () {
     return view('books.create');
 });
+
+
+Route::get('/books/{id}', function (string $id) {
+    $book = Book::find($id);
+    return view('books.show', ['book' => $book]);
+});
+
 
 Route::get('/token', function () {
     return csrf_token(); 
