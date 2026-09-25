@@ -1,4 +1,4 @@
-@props(['id', 'name'])
+@props(['id', 'name', 'value' => null])
 
 <label class="text-sm text-gray-700" for="name">
     {{ ucwords($name) }}
@@ -8,4 +8,5 @@
     id="{{ $id }}"
     type="date"
     name="{{ $name }}"
+    value="{{ $value }}"
 >
