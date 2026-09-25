@@ -6,9 +6,10 @@ use App\Models\Author;
 use App\Models\Book;
 
 Route::get('/', function () {
-    $authors = Author::all();
+    // $authors = Author::all();
     // return view('authors.index', ['authors' => $authors]);
-    return view('welcome');
+    // return view('welcome');
+    return redirect("/authors");
 });
 
 Route::get('authors', function () {
