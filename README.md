@@ -1,5 +1,5 @@
 ## Prerequisites
-- PHP
+- PHP with extensions enabled
 - Composer
 
 ## Installation
@@ -31,4 +31,9 @@ npm run build
 6. Run the project
 ```
 php artisan serve
+```
+
+7. 
+```
+npm run dev
 ```
