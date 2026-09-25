@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-5">
+    <div class="">
         <table>
             <tr>
                 <th> id </th>
@@ -14,7 +14,7 @@
             <tr>
                 <td>{{ $book->id }} </td>
                 <td>{{ $book->title }} </td>
-                <td>{{ $book->birth_date }} </td>
+                <td>{{ $book->published_date }} </td>
                 <td>{{ $book->created_at }} </td>
                 <td>{{ $book->updated_at }} </td>
             </tr>
