@@ -1,0 +1,66 @@
+<?php
+
+namespace Tests\Feature;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
+class AuthorTest extends TestCase
+{
+    /**
+     * A basic feature test example.
+     */
+    public function test_can_fetch_authors(): void
+    {
+        $response = $this->get('/api/authors');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_can_create_author(): void
+    {
+        $payload = [
+            "name" => "Firstname Lastname",
+            "birth_date" => "2012-07-04",
+        ];
+
+        $response = $this->postJson('/api/authors', $payload);
+        $response->assertStatus(201)
+            ->assertJsonFragment(['name' => "Firstname Lastname"]);
+    }
+
+    public function test_can_validate_create_author_no_name(): void
+    {
+        $payload = [
+            "name" => "",
+            "birth_date" => "2012-07-04",
+        ];
+
+        $response = $this->postJson('/api/authors', $payload);
+        $response->assertStatus(422);
+    }
+
+    public function test_can_validate_create_author_long_name(): void
+    {
+        $test_string = str_repeat("s", 256);
+        $payload = [
+            "name" => $test_string,
+            "birth_date" => "2012-07-04",
+        ];
+
+        $response = $this->postJson('/api/authors', $payload);
+        $response->assertStatus(422);
+    }
+
+    public function test_can_validate_create_author_no_date(): void
+    {
+        $payload = [
+            "name" => "Test",
+            "birth_date" => "",
+        ];
+
+        $response = $this->postJson('/api/authors', $payload);
+        $response->assertStatus(422);
+    }
+}
