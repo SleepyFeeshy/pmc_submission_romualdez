@@ -47,17 +47,19 @@
         });
         
     </script>
-    <table id="table-body">
-        <tr>
+    <table class="table-fixed min-w-5xl text-sm">
+        <thead class="text-sm font-medium text-left">
+            <tr>
             <th> id </th>
             <th> name </th>
             <th> birth_date </th>
             <th> created_at </th>
             <th> updated_at </th>
             <th> Actions </th>
-        </tr>
-        <div>
-        </div >
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody >
         {{-- @foreach ($authors as $author)
         <tr>
             <td>{{ $author->id }} </td>
