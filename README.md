@@ -24,17 +24,23 @@ npm install
 npm run build 
 ```
 
-5. Run the project
+5. Set up environment file
+```
+cp .env.example .env
+php artisan key:generate
+```
+
+6. Run the project
 ```
 php artisan serve
 ```
 
-6. (Optional): For real-time asset compilation during local development
+7. (Optional): For real-time asset compilation during local development
 ```
 npm run dev
 ```
 
-7. For testing
+8. For testing
 ```
 php artisan test
 ```
