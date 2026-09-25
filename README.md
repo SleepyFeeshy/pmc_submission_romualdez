@@ -1,7 +1,7 @@
 ## Prerequisites
 - PHP with extensions enabled
 - Composer
-
+- Node Package Manager
 ## Installation
 1. Clone the repo 
 ```
