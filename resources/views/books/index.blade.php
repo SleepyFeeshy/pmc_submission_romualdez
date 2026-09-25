@@ -51,13 +51,16 @@
 
     <div class="">
         <table class="table-fixed min-w-5xl text-sm">
-            <tr>
-                <th> id </th>
-                <th> title </th>
-                <th> publish_date </th>
-                <th> created_at </th>
-                <th> updated_at </th>
-            </tr>
+            <thead class="text-sm font-medium text-left">
+                <tr>
+                    <th> id </th>
+                    <th> title </th>
+                    <th> publish_date </th>
+                    <th> created_at </th>
+                    <th> updated_at </th>
+                    <th> Action </th>
+                </tr>
+            </thead>
             <tbody id="table-body">
             </tbody >
             {{-- @foreach ($books as $book)
